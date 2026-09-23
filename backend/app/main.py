@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api import api_router
 from app.core.config import settings
 
 app = FastAPI(
@@ -15,7 +16,8 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# CORS — allow the Next.js frontend (http://localhost:3000 by default).
+# CORS — allow the Next.js frontend origins configured via CORS_ORIGINS
+# (defaults to http://localhost:3000).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
@@ -24,8 +26,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(api_router, prefix="/api/v1")
+
 
 @app.get("/health")
 def health() -> dict[str, str]:
     """Liveness probe."""
-    return {"status": "healthy"}
+    return {"status": "healthy", "environment": settings.ENVIRONMENT}
