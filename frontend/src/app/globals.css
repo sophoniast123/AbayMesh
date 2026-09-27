@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * AbayMesh design tokens
+ * Palette: deep navy + blue + teal/emerald + cyan on light surfaces.
+ * Inspired by the AbayMesh logo (blue→green river gradient).
+ */
+@theme {
+  /* Deep navy — headings, dark sections, primary text */
+  --color-navy-50: #f0f5fa;
+  --color-navy-100: #dce8f3;
+  --color-navy-200: #c0d5e9;
+  --color-navy-300: #94b8d8;
+  --color-navy-400: #6194c2;
+  --color-navy-500: #3f76a8;
+  --color-navy-600: #2f5e8c;
+  --color-navy-700: #284c72;
+  --color-navy-800: #23405e;
+  --color-navy-900: #0c2340;
+  --color-navy-950: #071729;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Brand blue (logo blue) */
+  --color-brand-50: #eef7fd;
+  --color-brand-100: #d9edfb;
+  --color-brand-200: #b8dff7;
+  --color-brand-300: #84c7ef;
+  --color-brand-400: #4aa8e2;
+  --color-brand-500: #2489ce;
+  --color-brand-600: #1570b5;
+  --color-brand-700: #115a93;
+  --color-brand-800: #114a78;
+  --color-brand-900: #123f64;
+  --color-brand-950: #0b2947;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Aqua/teal (logo green→teal) */
+  --color-aqua-50: #ecfbf7;
+  --color-aqua-100: #d2f5ec;
+  --color-aqua-200: #a8ebdc;
+  --color-aqua-300: #6fdbc7;
+  --color-aqua-400: #38c4ae;
+  --color-aqua-500: #17a891;
+  --color-aqua-600: #0e8a77;
+  --color-aqua-700: #0e6f62;
+  --color-aqua-800: #10594f;
+  --color-aqua-900: #104a43;
+  --color-aqua-950: #042f2b;
+
+  /* App canvas — very light blue-white */
+  --color-canvas: #f6f9fc;
+
+  /* Layered, subtle shadows */
+  --shadow-card: 0 1px 2px rgb(12 35 64 / 0.04), 0 8px 24px -12px rgb(12 35 64 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(12 35 64 / 0.05), 0 16px 40px -16px rgb(12 35 64 / 0.2);
+
+  /* Restrained animations */
+  --animate-fade-in-up: fade-in-up 0.6s ease-out both;
+  --animate-fade-in: fade-in 0.5s ease-out both;
+  --animate-float-slow: float-slow 7s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 3.2s ease-in-out infinite;
+  --animate-dash-flow: dash-flow 1.6s linear infinite;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dash-flow {
+    to {
+      stroke-dashoffset: -12;
+    }
+  }
+}
+
+/* Brand helpers */
+@utility text-gradient-brand {
+  background-image: linear-gradient(100deg, var(--color-brand-600), var(--color-aqua-500));
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(120deg, var(--color-brand-600), var(--color-aqua-500));
+}
+
+@utility glass {
+  background-color: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(255 255 255 / 0.6);
+}
+
+@utility glow-soft {
+  box-shadow:
+    0 0 0 1px rgb(36 137 206 / 0.08),
+    0 8px 32px -8px rgb(23 168 145 / 0.25);
+}
+
+:root {
+  --background: var(--color-canvas);
+  --foreground: var(--color-navy-900);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -3,8 +3,12 @@
 import { useState, type FormEvent } from "react";
 
 import { Modal } from "@/components/ui/Modal";
+import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 import type { CreateOrganizationInput } from "@/lib/api";
+
+const INPUT_CLASSES =
+  "w-full rounded-xl border border-navy-200 bg-white px-3 py-2 text-sm text-navy-900 placeholder-navy-300 transition-shadow focus:border-brand-400 focus:outline-none focus:ring-4 focus:ring-brand-500/15";
 
 interface CreateOrganizationModalProps {
   onClose: () => void;
@@ -40,9 +44,9 @@ export function CreateOrganizationModal({
         <div>
           <label
             htmlFor="org-name"
-            className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200"
+            className="mb-1 block text-sm font-medium text-navy-800"
           >
-            Organization Name <span aria-hidden="true">*</span>
+            Organization Name <span aria-hidden="true" className="text-aqua-600">*</span>
           </label>
           <input
             id="org-name"
@@ -52,16 +56,16 @@ export function CreateOrganizationModal({
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder="e.g. Gebeta Manufacturing"
-            className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+            className={INPUT_CLASSES}
           />
         </div>
 
         <div>
           <label
             htmlFor="org-slug"
-            className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200"
+            className="mb-1 block text-sm font-medium text-navy-800"
           >
-            Slug <span className="font-normal text-zinc-500">(optional)</span>
+            Slug <span className="font-normal text-navy-400">(optional)</span>
           </label>
           <input
             id="org-slug"
@@ -71,28 +75,20 @@ export function CreateOrganizationModal({
             value={slug}
             onChange={(event) => setSlug(event.target.value)}
             placeholder="auto-generated from name if left empty"
-            className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 font-mono text-sm text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+            className={`${INPUT_CLASSES} font-mono`}
           />
         </div>
 
-        {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
+        {formError && <p className="text-sm text-red-600">{formError}</p>}
 
         <div className="flex justify-end gap-2 pt-1">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-lg px-4 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
-          >
+          <Button variant="ghost" onClick={onClose}>
             Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={submitting}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          >
+          </Button>
+          <Button type="submit" disabled={submitting}>
             {submitting && <Spinner className="h-4 w-4" />}
             {submitting ? "Creating…" : "Create Organization"}
-          </button>
+          </Button>
         </div>
       </form>
     </Modal>

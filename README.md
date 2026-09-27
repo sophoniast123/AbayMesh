@@ -1,6 +1,8 @@
-# Supply Chain Data Fabric
+# AbayMesh
 
-AI-powered interoperability layer that ingests heterogeneous supply chain data (CSV, Excel, REST), semantically maps source fields to a shared canonical model with human-in-the-loop approval, and surfaces trusted unified data through a dashboard, REST API, and voice interface.
+**AI-Powered Supply Chain Data Interoperability**
+
+AbayMesh connects fragmented supply-chain data — ingesting heterogeneous sources (CSV, Excel, REST), semantically mapping different schemas to a shared canonical model with human-in-the-loop approval, and unifying everything into one trusted data layer.
 
 > **Core principle:** _AI suggests. Backend code validates and enforces. Humans approve uncertain mappings._
 
@@ -27,11 +29,11 @@ AI-powered interoperability layer that ingests heterogeneous supply chain data (
 │   │   └── services/ # Business logic (profiling, mapping, normalization)
 │   ├── migrations/   # Database migrations
 │   └── requirements.txt
-├── frontend/         # Next.js application
+├── frontend/         # AbayMesh web console & landing page
 │   └── src/
-│       ├── app/          # App Router pages
-│       ├── components/   # UI components (layout/, ui/)
-│       └── lib/          # API clients & shared utilities
+│       ├── app/          # App Router pages & layouts
+│       ├── components/   # brand/, layout/, ui/, feature components
+│       └── lib/          # API clients & shared types
 └── docs/             # PRD, architecture, and review documents
 ```
 
@@ -82,6 +84,10 @@ npm run dev
 ```
 
 Open <http://localhost:3000> in your browser.
+
+## Deployment (Vercel)
+
+The frontend deploys to Vercel (`vercel deploy` from `frontend/`, or connect the repo in the Vercel dashboard). Set `NEXT_PUBLIC_API_URL` in the Vercel project environment to the public URL of the FastAPI backend — it is the only environment variable the frontend needs, and no secrets are stored client-side.
 
 ## Documentation
 

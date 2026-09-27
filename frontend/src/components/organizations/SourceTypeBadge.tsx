@@ -1,9 +1,9 @@
 import type { SourceType } from "@/lib/types";
 
 const BADGE_CLASSES: Record<SourceType, string> = {
-  csv: "bg-green-100 text-green-800 dark:bg-green-950/60 dark:text-green-300",
-  excel: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300",
-  rest: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300",
+  csv: "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20",
+  excel: "bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-600/20",
+  rest: "bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-600/20",
 };
 
 const LABELS: Record<SourceType, string> = {
@@ -15,7 +15,7 @@ const LABELS: Record<SourceType, string> = {
 export function SourceTypeBadge({ type }: { type: SourceType }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${BADGE_CLASSES[type]}`}
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${BADGE_CLASSES[type]}`}
     >
       {LABELS[type]}
     </span>

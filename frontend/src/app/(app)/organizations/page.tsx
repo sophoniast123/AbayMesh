@@ -6,6 +6,8 @@ import { CreateDataSourceModal } from "@/components/organizations/CreateDataSour
 import { CreateOrganizationModal } from "@/components/organizations/CreateOrganizationModal";
 import { OrganizationCard } from "@/components/organizations/OrganizationCard";
 import { Alert } from "@/components/ui/Alert";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Spinner } from "@/components/ui/Spinner";
 import {
   createDataSource,
@@ -108,20 +110,16 @@ export default function OrganizationsPage() {
     <div className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 md:px-8">
       <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h1 className="text-2xl font-semibold tracking-tight text-navy-900">
             Organizations &amp; Data Sources
           </h1>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mt-1 text-sm text-navy-500">
             Manage supplier organizations and their connected data sources.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setOrgModalOpen(true)}
-          className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-        >
+        <Button onClick={() => setOrgModalOpen(true)}>
           <span aria-hidden="true">+</span> New Organization
-        </button>
+        </Button>
       </header>
 
       {error && (
@@ -135,29 +133,24 @@ export default function OrganizationsPage() {
       )}
 
       {loading ? (
-        <div
-          role="status"
-          className="flex flex-col items-center justify-center gap-3 rounded-xl border border-zinc-200 bg-white py-24 text-zinc-500 dark:border-zinc-800 dark:bg-zinc-950"
-        >
-          <Spinner className="h-6 w-6" />
-          <p className="text-sm">Loading organizations…</p>
-        </div>
+        <Card className="flex flex-col items-center justify-center gap-3 py-24 text-navy-400">
+          <Spinner className="h-6 w-6 text-brand-500" />
+          <p role="status" className="text-sm">
+            Loading organizations…
+          </p>
+        </Card>
       ) : organizations.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-zinc-300 bg-white px-6 py-24 text-center dark:border-zinc-700 dark:bg-zinc-950">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
+        <div className="rounded-2xl border border-dashed border-navy-200 bg-white/60 px-6 py-24 text-center">
+          <h2 className="text-lg font-medium text-navy-900">
             No organizations yet
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="mx-auto mt-2 max-w-md text-sm text-navy-500">
             Create your first organization to start connecting supplier data
             sources.
           </p>
-          <button
-            type="button"
-            onClick={() => setOrgModalOpen(true)}
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
-          >
+          <Button className="mt-6" onClick={() => setOrgModalOpen(true)}>
             <span aria-hidden="true">+</span> New Organization
-          </button>
+          </Button>
         </div>
       ) : (
         <div className="flex flex-col gap-4">

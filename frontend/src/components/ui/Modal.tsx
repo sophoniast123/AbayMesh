@@ -28,18 +28,16 @@ export function Modal({ title, onClose, children }: ModalProps) {
         type="button"
         aria-label="Close dialog"
         onClick={onClose}
-        className="absolute inset-0 bg-zinc-950/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-navy-950/50 backdrop-blur-sm"
       />
-      <div className="relative w-full max-w-md rounded-xl border border-zinc-200 bg-white p-6 shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="animate-fade-in relative w-full max-w-md rounded-2xl border border-navy-100 bg-white p-6 shadow-lift">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            {title}
-          </h2>
+          <h2 className="text-base font-semibold text-navy-900">{title}</h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="rounded-md p-1 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+            className="rounded-md p-1 text-navy-400 transition-colors hover:bg-navy-50 hover:text-navy-700"
           >
             &#10005;
           </button>
