@@ -57,13 +57,12 @@ def get_supabase_client() -> Client:
     fail when Supabase credentials are not yet configured (e.g. in tests
     or fresh checkouts without a `.env` file).
     """
-    url = settings.SUPABASE_URL.strip()
-    key = settings.SUPABASE_SERVICE_ROLE_KEY.strip()
-    if not url or not key:
+    if not settings.SUPABASE_URL or not settings.SUPABASE_SERVICE_ROLE_KEY:
         raise RuntimeError(
             "Supabase is not configured. Set SUPABASE_URL and "
             "SUPABASE_SERVICE_ROLE_KEY in backend/.env (see backend/.env.example)."
         )
+    return create_client(settings.SUPABASE_URL, settings.SUPABASE_SERVICE_ROLE_KEY)
     normalized_url = _normalize_supabase_url(url)
     if _is_placeholder(normalized_url) or _is_placeholder(key):
         raise RuntimeError(
